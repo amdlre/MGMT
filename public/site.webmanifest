@@ -1,0 +1,18 @@
+{
+  "name": "Leasehold Management",
+  "short_name": "LH Management",
+  "description": "منظومة تشغيل موحدة تدير جميع عمليات العقار",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#0B0B0B",
+  "background_color": "#FAFAFA",
+  "display": "standalone",
+  "start_url": "/",
+  "lang": "ar",
+  "dir": "rtl"
+}

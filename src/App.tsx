@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Building2, 
-  ShieldCheck, 
-  BarChart3, 
-  Users, 
-  FileText, 
-  ChevronLeft, 
-  Menu, 
+import {
+  Building2,
+  ShieldCheck,
+  BarChart3,
+  Users,
+  FileText,
+  ChevronLeft,
+  Menu,
   X,
   ArrowLeft,
   CheckCircle2,
@@ -23,20 +23,20 @@ import {
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 
 // --- Types ---
-type Page = 'home' | 'about' | 'how-it-works' | 'pricing' | 'faq' | 'contact' | 'security' | 'legal';
+type Page = 'home' | 'about' | 'how-it-works' | 'pricing' | 'faq' | 'contact' | 'security' | 'legal' | 'news';
 
 // --- Components ---
 
-const Button = ({ 
-  children, 
-  variant = 'primary', 
-  className = '', 
+const Button = ({
+  children,
+  variant = 'primary',
+  className = '',
   onClick,
   type = 'button',
   icon: Icon
-}: { 
-  children: React.ReactNode, 
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'white', 
+}: {
+  children: React.ReactNode,
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'white',
   className?: string,
   onClick?: () => void,
   type?: 'button' | 'submit',
@@ -52,12 +52,12 @@ const Button = ({
 
   const baseStyles = 'px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center justify-center gap-2 active:scale-[0.98]';
   const variantStyles = variants[variant];
-  
+
   // Simple logic to avoid color conflicts
   const finalStyles = `${baseStyles} ${variantStyles} ${className}`;
 
   return (
-    <button 
+    <button
       type={type}
       onClick={onClick}
       className={finalStyles}
@@ -99,7 +99,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isDarkNav ? 'py-3' : 'py-6'}`}>
       <div className={`max-w-7xl mx-auto px-6`}>
         <div className={`flex justify-between items-center transition-all duration-500 px-6 py-3 rounded-2xl ${isDarkNav ? 'glass-dark shadow-glass' : 'bg-transparent'}`}>
-          <div 
+          <div
             className="flex items-center gap-2 cursor-pointer group"
             onClick={() => setCurrentPage('home')}
           >
@@ -113,17 +113,16 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
               <button
                 key={link.value}
                 onClick={() => setCurrentPage(link.value)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                  currentPage === link.value 
-                    ? isDarkNav ? 'bg-white/10 text-white' : 'bg-white/20 text-white'
-                    : isDarkNav ? 'text-white/60 hover:text-white hover:bg-white/5' : 'text-white/80 hover:text-white hover:bg-white/10'
-                }`}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${currentPage === link.value
+                  ? isDarkNav ? 'bg-white/10 text-white' : 'bg-white/20 text-white'
+                  : isDarkNav ? 'text-white/60 hover:text-white hover:bg-white/5' : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
               >
                 {link.label}
               </button>
             ))}
             <div className={`w-px h-4 mx-3 hidden lg:block ${isDarkNav ? 'bg-white/10' : 'bg-white/20'}`}></div>
-            <Button 
+            <Button
               variant={isDarkNav ? 'secondary' : 'white'}
               onClick={() => setCurrentPage('contact')}
               className="py-2 px-6 text-sm"
@@ -132,8 +131,8 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
             </Button>
           </div>
 
-          <button 
-            className="md:hidden p-2 rounded-xl hover:bg-black/5 transition-colors" 
+          <button
+            className="md:hidden p-2 rounded-xl hover:bg-black/5 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
@@ -165,7 +164,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
                 {link.label}
               </button>
             ))}
-            <Button 
+            <Button
               className="mt-4 w-full"
               onClick={() => {
                 setCurrentPage('contact');
@@ -195,7 +194,7 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
             نحن نعيد تعريف إدارة العقارات طويلة الأمد عبر التكنولوجيا والوضوح التشغيلي التام.
           </p>
         </div>
-        
+
         <div>
           <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-primary-dark">المنتج</h4>
           <ul className="space-y-4 text-muted-gray">
@@ -209,11 +208,12 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
           <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-primary-dark">الشركة</h4>
           <ul className="space-y-4 text-muted-gray">
             <li><button onClick={() => setCurrentPage('about')} className="hover:text-primary-dark transition-colors cursor-pointer">من نحن</button></li>
+            <li><button onClick={() => setCurrentPage('news')} className="hover:text-primary-dark transition-colors cursor-pointer">الأخبار</button></li>
             <li><button onClick={() => setCurrentPage('legal')} className="hover:text-primary-dark transition-colors cursor-pointer">الخصوصية والشروط</button></li>
           </ul>
         </div>
       </div>
-      
+
       <div className="pt-10 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-sm text-muted-gray font-medium">
           © 2026 Leasehold Management. جميع الحقوق محفوظة.
@@ -240,7 +240,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
     target: heroRef,
     offset: ["start start", "end start"]
   });
-  
+
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
@@ -255,9 +255,9 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
           <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-soft-accent/10 rounded-full blur-[120px]"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/0 via-primary-dark/50 to-primary-dark"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 w-full text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -272,7 +272,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
               منظومة تشغيل موحدة تدير جميع عمليات العقار — التشغيل، الصيانة، والإدارة المالية — ضمن منصة واحدة تضمن استقراره وقيمته عبر الزمن.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Button 
+              <Button
                 variant="secondary"
                 onClick={() => setCurrentPage('contact')}
                 className="px-8 py-4 text-sm min-w-[180px]"
@@ -280,7 +280,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
               >
                 سجل عقارك
               </Button>
-              <Button 
+              <Button
                 variant="ghost"
                 onClick={() => setCurrentPage('how-it-works')}
                 className="px-8 py-4 text-sm text-white/70 hover:text-white hover:bg-white/5 border border-white/10 min-w-[180px]"
@@ -303,8 +303,8 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
             </div>
           </motion.div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
@@ -372,19 +372,19 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
               </p>
             </div>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {[
-              { icon: <LayoutDashboard />, title: "الإدارة التشغيلية", desc: "تشغيل يومي منضبط يحافظ على استقرار العقار بدون انقطاع" },
-              { icon: <BarChart3 />, title: "الإدارة المالية", desc: "تدفقات واضحة وتحكم كامل في الأداء المالي" },
-              { icon: <ShieldCheck />, title: "الصيانة وحماية الأصل", desc: "حفاظ مستمر على جودة العقار وتقليل التآكل التشغيلي" },
-              { icon: <Users />, title: "العلاقة الإيجارية", desc: "إشغال مستقر وإدارة احترافية للعلاقة مع المستفيد" },
-              { icon: <FileText />, title: "تقارير الأداء", desc: "رؤية واضحة تدعم اتخاذ القرار بثقة" },
-              { icon: <MessageSquare />, title: "تجربة المستفيد", desc: "تنظيم كامل للتواصل يرفع جودة التشغيل" },
+              { icon: LayoutDashboard, title: "الإدارة التشغيلية", desc: "تشغيل يومي منضبط يحافظ على استقرار العقار بدون انقطاع" },
+              { icon: BarChart3, title: "الإدارة المالية", desc: "تدفقات واضحة وتحكم كامل في الأداء المالي" },
+              { icon: ShieldCheck, title: "الصيانة وحماية الأصل", desc: "حفاظ مستمر على جودة العقار وتقليل التآكل التشغيلي" },
+              { icon: Users, title: "العلاقة الإيجارية", desc: "إشغال مستقر وإدارة احترافية للعلاقة مع المستفيد" },
+              { icon: FileText, title: "تقارير الأداء", desc: "رؤية واضحة تدعم اتخاذ القرار بثقة" },
+              { icon: MessageSquare, title: "تجربة المستفيد", desc: "تنظيم كامل للتواصل يرفع جودة التشغيل" },
             ].map((item, i) => (
               <div key={i} className="group p-10 bg-light-bg/50 rounded-2xl border border-border-subtle hover:border-soft-accent/20 transition-all duration-500 hover:shadow-premium hover:-translate-y-1">
                 <div className="w-12 h-12 bg-white text-primary-dark rounded-xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-primary-dark group-hover:text-white transition-all duration-500">
-                  {React.cloneElement(item.icon as React.ReactElement, { className: "w-6 h-6" })}
+                  <item.icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-primary-dark tracking-tight group-hover:text-soft-accent transition-colors">{item.title}</h3>
                 <p className="text-sm text-muted-gray leading-relaxed font-light">{item.desc}</p>
@@ -394,7 +394,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
 
           <div className="flex flex-col items-center gap-8 pt-12 border-t border-border-subtle">
             <p className="text-lg font-medium text-primary-dark">كل ما يحتاجه عقارك — ضمن منظومة تشغيل واحدة</p>
-            <Button 
+            <Button
               variant="secondary"
               onClick={() => setCurrentPage('contact')}
               className="px-12 py-5 text-lg shadow-xl hover:shadow-2xl transition-all"
@@ -442,7 +442,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 سجل عقارك — بدون التزام
               </Button>
             </div>
-            
+
             <div className="grid grid-cols-1 gap-4">
               <Card className="p-10 bg-light-bg border-border-subtle" hover={false}>
                 <h4 className="text-xl font-bold text-primary-dark mb-4 tracking-tight">ما الذي يؤثر على تكلفة الإدارة؟</h4>
@@ -479,10 +479,10 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
               لوحات متابعة متقدمة تعرض الأداء المالي والتشغيلي للعقار بطريقة عملية وسهلة القراءة، تمنحك السيطرة الكاملة على أصولك.
             </p>
           </div>
-          
+
           <div className="relative max-w-5xl mx-auto">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary-accent/10 to-soft-accent/10 rounded-[40px] blur-3xl opacity-50"></div>
-            
+
             <Card className="relative overflow-hidden p-0 border-border-subtle shadow-2xl bg-white rounded-[32px]" hover={false}>
               {/* Dashboard Header */}
               <div className="bg-white border-b border-border-subtle p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -541,7 +541,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                       </div>
                       <div className="h-48 flex items-end justify-between gap-2 px-2">
                         {[40, 65, 45, 80, 55, 90, 70, 85, 60, 95, 75, 100].map((h, i) => (
-                          <motion.div 
+                          <motion.div
                             key={i}
                             initial={{ height: 0 }}
                             whileInView={{ height: `${h}%` }}
@@ -557,7 +557,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-6">
                     <div className="p-6 bg-white border border-black/5 rounded-2xl shadow-sm">
                       <h4 className="text-sm font-bold text-primary-dark uppercase tracking-widest mb-6">توزيع المصروفات</h4>
@@ -573,7 +573,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                               <span className="text-muted-gray">{item.value}%</span>
                             </div>
                             <div className="h-1.5 w-full bg-black/5 rounded-full overflow-hidden">
-                              <motion.div 
+                              <motion.div
                                 initial={{ width: 0 }}
                                 whileInView={{ width: `${item.value}%` }}
                                 transition={{ duration: 1, delay: 0.5 }}
@@ -584,7 +584,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                         ))}
                       </div>
                     </div>
-                    
+
                     <div className="p-6 bg-primary-dark rounded-2xl text-white">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
@@ -639,7 +639,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 ))}
               </div>
             </motion.div>
-            
+
             <div className="relative">
               <div className="aspect-square bg-white/5 rounded-[40px] border border-white/10 p-12 flex items-center justify-center overflow-hidden relative group">
                 <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity duration-700">
@@ -651,7 +651,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 </div>
                 <div className="relative z-10 text-center">
                   <div className="text-sm font-bold text-soft-accent/60 uppercase tracking-widest mb-4">مدة الانتفاع</div>
-                  <motion.div 
+                  <motion.div
                     initial={{ scale: 0.8, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 1 }}
@@ -677,7 +677,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
             {/* Subtle Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary-accent/10 to-transparent"></div>
             <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-accent/10 blur-[120px]"></div>
-            
+
             <div className="relative z-10">
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-10 tracking-tight leading-tight">
                 هل أنت مستعد تشوف <br />
@@ -687,9 +687,9 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 خلنا ندير لك التفاصيل… ونرجع لك الوضوح.
               </p>
               <div className="flex flex-col items-center gap-6">
-                <Button 
-                  variant="white" 
-                  onClick={() => setCurrentPage('contact')} 
+                <Button
+                  variant="white"
+                  onClick={() => setCurrentPage('contact')}
                   className="px-16 py-6 text-xl rounded-full hover:scale-105 transition-transform duration-300"
                   icon={ArrowLeft}
                 >
@@ -718,7 +718,7 @@ const AboutPage = () => (
         <div className="inline-block px-4 py-1 rounded-full bg-primary-dark/5 text-primary-dark text-sm font-bold mb-6 uppercase tracking-widest">من نحن</div>
         <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-4 tracking-tight">لا ندير عقارات… <br /> <span className="text-muted-gray">ندير استمراريتها.</span></h1>
         <div className="text-lg font-bold text-primary-accent uppercase tracking-[0.2em] mb-12">تشغيل واضح. نتائج مستمرة. بدون تعقيد.</div>
-        
+
         <div className="space-y-10 text-xl text-muted-gray leading-relaxed font-light">
           <p className="text-primary-dark font-medium text-2xl">
             نحن في Leasehold Management لا نقدم خدمات متفرقة، بل نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد.
@@ -784,7 +784,7 @@ const HowItWorksPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void 
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-48">
           {steps.map((step, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -809,7 +809,7 @@ const HowItWorksPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void 
             {/* Subtle Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-primary-accent/10 to-transparent"></div>
             <div className="absolute top-0 right-0 w-1/2 h-full bg-primary-accent/10 blur-[120px]"></div>
-            
+
             <div className="relative z-10">
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-10 tracking-tight leading-tight">
                 هل أنت مستعد تشوف <br />
@@ -818,9 +818,9 @@ const HowItWorksPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void 
               <p className="text-xl md:text-2xl text-white/60 mb-16 max-w-2xl mx-auto font-light leading-relaxed">
                 خلنا ندير لك التفاصيل… ونرجع لك الوضوح.
               </p>
-              <Button 
-                variant="white" 
-                onClick={() => setCurrentPage('contact')} 
+              <Button
+                variant="white"
+                onClick={() => setCurrentPage('contact')}
                 className="px-16 py-6 text-xl rounded-full hover:scale-105 transition-transform duration-300"
                 icon={ArrowLeft}
               >
@@ -993,19 +993,19 @@ const FAQPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => {
           <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">الأسئلة الشائعة</h1>
           <p className="text-xl text-muted-gray font-light">كل ما تحتاج معرفته عن نموذج إدارتنا الحديث والشفاف.</p>
         </div>
-        
+
         <div className="space-y-6">
           {faqs.map((faq, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className="bg-white border border-border-subtle rounded-[32px] overflow-hidden transition-all duration-500 hover:border-primary-dark/20 hover:shadow-xl group"
             >
-              <button 
+              <button
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
                 className="w-full p-10 text-right flex justify-between items-center hover:bg-gray-50/50 transition-colors"
               >
                 <span className="text-xl md:text-2xl font-bold text-primary-dark tracking-tight leading-tight">{faq.q}</span>
-                <div className={`w-10 h-10 rounded-full bg-primary-dark/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${openIndex === i ? 'rotate-180 bg-primary-dark text-white' : ''}`}>
+                <div className={`w-10 h-10 rounded-full bg-primary-dark/5 flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${openIndex === i ? '-rotate-90 bg-primary-dark' : ''}`}>
                   <ChevronLeft className="w-6 h-6" />
                 </div>
               </button>
@@ -1018,7 +1018,7 @@ const FAQPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => {
                     className="px-10 pb-10"
                   >
                     <div className="text-xl text-muted-gray leading-[1.8] font-light">
-                      {faq.a.split('**').map((part, index) => 
+                      {faq.a.split('**').map((part, index) =>
                         index % 2 === 1 ? <strong key={index} className="text-primary-dark font-bold">{part}</strong> : part
                       )}
                     </div>
@@ -1034,9 +1034,9 @@ const FAQPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => {
           <Card className="p-16 bg-white border border-border-subtle rounded-[40px] shadow-2xl" hover={false}>
             <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-8 tracking-tight">جاهز تبدأ بدون التزام؟</h2>
             <div className="flex justify-center">
-              <Button 
-                variant="primary" 
-                onClick={() => setCurrentPage('contact')} 
+              <Button
+                variant="primary"
+                onClick={() => setCurrentPage('contact')}
                 className="px-16 py-6 text-xl rounded-full"
                 icon={ArrowLeft}
               >
@@ -1061,7 +1061,7 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
         <p className="text-xl md:text-2xl text-[#6B7280] max-w-3xl mx-auto leading-relaxed font-light mb-12">
           نموذج تسعير شفاف يعتمد على واقع تشغيل عقارك، مو أرقام عشوائية.
         </p>
-        
+
         {/* Business Model Highlight */}
         <div className="inline-block max-w-2xl mx-auto p-8 rounded-[32px] bg-[#0B0B0B] text-white shadow-2xl">
           <div className="flex flex-col md:flex-row items-center gap-6 text-right md:text-center">
@@ -1099,9 +1099,9 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
           خلال دقائق، نعطيك تصور واضح لتكلفة إدارة عقارك… بدون أي التزام.
         </p>
         <div className="flex justify-center">
-          <Button 
-            variant="primary" 
-            onClick={() => setCurrentPage('contact')} 
+          <Button
+            variant="primary"
+            onClick={() => setCurrentPage('contact')}
             className="px-20 py-6 text-xl rounded-full bg-[#0B0B0B] text-white hover:scale-105 transition-transform duration-300"
             icon={ArrowLeft}
           >
@@ -1116,13 +1116,39 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
 const ContactPage = () => {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setFormError('');
+
     if (step === 1) {
       setStep(2);
     } else {
-      setSubmitted(true);
+      setIsSubmitting(true);
+
+      try {
+        const formData = new FormData(e.currentTarget);
+        const response = await fetch('https://formspree.io/f/xojpqzoj', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          setSubmitted(true);
+        } else {
+          const data = await response.json();
+          setFormError(data.errors?.map((err: any) => err.message).join(', ') || 'حدث خطأ في إرسال النموذج');
+        }
+      } catch (error) {
+        setFormError('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -1135,7 +1161,7 @@ const ContactPage = () => {
           <p className="text-xl md:text-2xl text-[#6B7280] mb-12 leading-relaxed font-light max-w-lg">
             فريقنا جاهز لمناقشة احتياجات عقارك وتصميم نموذج إدارة مناسب يضمن لك الاستقرار والوضوح التام.
           </p>
-          
+
           <div className="space-y-12">
             <div className="flex items-center gap-6 group">
               <div className="w-16 h-16 bg-[#FAFAFA] border border-[#0B0B0B]/5 text-[#0B0B0B] rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:bg-[#0B0B0B] group-hover:text-white">
@@ -1166,7 +1192,7 @@ const ContactPage = () => {
 
           <Card className="p-10 md:p-16 bg-white border border-[#0B0B0B]/5 rounded-[48px] shadow-2xl relative z-10" hover={false}>
             {submitted ? (
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="text-center py-12"
@@ -1192,7 +1218,7 @@ const ContactPage = () => {
 
                 <AnimatePresence mode="wait">
                   {step === 1 ? (
-                    <motion.div 
+                    <motion.div
                       key="step1"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -1202,19 +1228,19 @@ const ContactPage = () => {
                       <h3 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">خلنا نبدأ بمعلومات بسيطة</h3>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">الاسم الكامل</label>
-                        <input required type="text" placeholder="مثلاً: فيصل بن عبدالعزيز" className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
+                        <input required name="name" type="text" placeholder="مثلاً: فيصل بن عبدالعزيز" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">رقم الجوال</label>
-                        <input required type="tel" placeholder="05XXXXXXXX (للتواصل السريع)" className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
+                        <input required name="phone" type="tel" placeholder="05XXXXXXXX (للتواصل السريع)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">البريد الإلكتروني</label>
-                        <input required type="email" placeholder="name@company.com (لإرسال التقرير)" className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
+                        <input required name="email" type="email" placeholder="name@company.com (لإرسال التقرير)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
                       </div>
                     </motion.div>
                   ) : (
-                    <motion.div 
+                    <motion.div
                       key="step2"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
@@ -1225,16 +1251,16 @@ const ContactPage = () => {
                       <div className="grid grid-cols-2 gap-6">
                         <div className="space-y-3">
                           <label className="text-sm font-bold text-[#0B0B0B]">المدينة</label>
-                          <input required type="text" placeholder="الرياض، جدة، الخبر..." className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
+                          <input required name="city" type="text" placeholder="الرياض، جدة، الخبر..." className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
                         </div>
                         <div className="space-y-3">
                           <label className="text-sm font-bold text-[#0B0B0B]">عدد الوحدات</label>
-                          <input required type="number" placeholder="مثلاً: 12 وحدة" className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
+                          <input required name="units" type="number" placeholder="مثلاً: 12 وحدة" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
                         </div>
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">الحالة الحالية للعقار</label>
-                        <select className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all appearance-none cursor-pointer">
+                        <select name="status" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all appearance-none cursor-pointer">
                           <option>مؤجر بالكامل</option>
                           <option>مؤجر جزئياً</option>
                           <option>شاغر</option>
@@ -1243,25 +1269,30 @@ const ContactPage = () => {
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">رسالة إضافية (اختياري)</label>
-                        <textarea rows={3} placeholder="أخبرنا عن نوع العقار أو أي تفاصيل تهمك..." className="w-full p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all resize-none placeholder:text-[#0B0B0B]/20"></textarea>
+                        <textarea name="message" rows={3} placeholder="أخبرنا عن نوع العقار أو أي تفاصيل تهمك..." className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all resize-none placeholder:text-[#0B0B0B]/20"></textarea>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
                 <div className="flex flex-col gap-4">
-                  <Button 
+                  {formError && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm font-medium text-center">
+                      {formError}
+                    </div>
+                  )}
+                  <Button
                     type="submit"
-                    className="w-full py-6 text-xl rounded-full bg-[#0B0B0B] text-white hover:scale-[1.02] transition-transform duration-300"
+                    className="w-full py-6 text-xl rounded-full bg-[#0B0B0B] text-white hover:scale-[1.02] transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                   >
-                    {step === 1 ? "التالي" : "احصل على تقييم مجاني"}
+                    {isSubmitting ? "جاري الإرسال..." : step === 1 ? "التالي" : "احصل على تقييم مجاني"}
                   </Button>
                   <p className="text-center text-xs text-[#6B7280] font-bold">
                     بدون أي التزام — نبدأ فقط إذا قررت
                   </p>
                   {step === 2 && (
-                    <button 
-                      type="button" 
+                    <button
+                      type="button"
                       onClick={() => setStep(1)}
                       className="text-sm font-bold text-[#0B0B0B]/40 hover:text-[#0B0B0B] transition-colors mt-2"
                     >
@@ -1279,6 +1310,61 @@ const ContactPage = () => {
   );
 };
 
+const NewsPage = () => {
+  const newsArticles = [
+    {
+      date: "15 مارس 2026",
+      title: "توسع Leasehold Management في السوق السعودي",
+      excerpt: "نعلن عن افتتاح مكاتب جديدة في جدة والدمام لتقديم خدمات إدارة عقارات أفضل",
+      category: "أخبار الشركة"
+    },
+    {
+      date: "10 مارس 2026",
+      title: "تقرير: نمو قطاع الإدارة العقارية بنسبة 23%",
+      excerpt: "دراسة جديدة تظهر نمواً ملحوظاً في الطلب على خدمات الإدارة العقارية المتكاملة",
+      category: "تقارير السوق"
+    },
+    {
+      date: "5 مارس 2026",
+      title: "إطلاق لوحة التحكم الذكية للعملاء",
+      excerpt: "منصة جديدة توفر رؤية شاملة ومباشرة لأداء العقارات في الوقت الفعلي",
+      category: "تحديثات المنتج"
+    }
+  ];
+
+  return (
+    <div className="pt-48 pb-32 bg-light-bg">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-24">
+          <div className="inline-block px-4 py-1 rounded-full bg-primary-dark/5 text-primary-dark text-sm font-bold mb-6 uppercase tracking-widest">آخر الأخبار</div>
+          <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-8 tracking-tight">تابع آخر <br /> <span className="text-muted-gray">مستجداتنا</span></h1>
+          <p className="text-xl text-muted-gray max-w-2xl mx-auto leading-relaxed font-light">
+            كل ما هو جديد في عالم إدارة العقارات والتطورات في خدماتنا
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {newsArticles.map((article, i) => (
+            <Card key={i} className="p-8 bg-white border border-border-subtle group cursor-pointer" hover={true}>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-xs font-bold text-primary-accent uppercase tracking-widest">{article.category}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-border-subtle"></span>
+                <span className="text-xs text-muted-gray">{article.date}</span>
+              </div>
+              <h3 className="text-2xl font-bold text-primary-dark mb-4 tracking-tight group-hover:text-soft-accent transition-colors">{article.title}</h3>
+              <p className="text-muted-gray leading-relaxed font-light mb-6">{article.excerpt}</p>
+              <div className="flex items-center gap-2 text-primary-dark group-hover:text-soft-accent transition-colors">
+                <span className="text-sm font-bold">اقرأ المزيد</span>
+                <ArrowLeft className="w-4 h-4 group-hover:translate-x-[-4px] transition-transform" />
+              </div>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
@@ -1286,12 +1372,80 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Update page metadata dynamically
+    const metadata: Record<Page, { title: string; description: string }> = {
+      home: {
+        title: 'Leasehold Management | إدارة أصول الملكية المؤجرة',
+        description: 'منظومة تشغيل موحدة تدير جميع عمليات العقار - التشغيل، الصيانة، والإدارة المالية'
+      },
+      about: {
+        title: 'من نحن | Leasehold Management',
+        description: 'نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد بوضوح واستمرارية'
+      },
+      'how-it-works': {
+        title: 'طريقة العمل | Leasehold Management',
+        description: 'منهجية منظمة لإدارة عقارك بكفاءة وشفافية تامة'
+      },
+      pricing: {
+        title: 'الأسعار | Leasehold Management',
+        description: 'نموذج تسعير شفاف - ادفع فقط عند الطلب بدون التزام طويل الأمد'
+      },
+      faq: {
+        title: 'الأسئلة الشائعة | Leasehold Management',
+        description: 'إجابات على جميع أسئلتك حول نموذج إدارتنا الحديث والشفاف'
+      },
+      contact: {
+        title: 'تواصل معنا | Leasehold Management',
+        description: 'ابدأ تنظيم إدارة عقارك مع فريقنا المختص'
+      },
+      security: {
+        title: 'الأمان | Leasehold Management',
+        description: 'معايير أمان صارمة لحماية بياناتك وأموالك وأصولك العقارية'
+      },
+      legal: {
+        title: 'الخصوصية والشروط | Leasehold Management',
+        description: 'سياسة الخصوصية وشروط الخدمة - شفافية ووضوح في التعامل'
+      },
+      news: {
+        title: 'الأخبار | Leasehold Management',
+        description: 'آخر الأخبار والتطورات في عالم إدارة العقارات'
+      }
+    };
+
+    const pageMetadata = metadata[currentPage];
+    document.title = pageMetadata.title;
+
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', pageMetadata.description);
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) {
+      ogTitle.setAttribute('content', pageMetadata.title);
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    if (ogDescription) {
+      ogDescription.setAttribute('content', pageMetadata.description);
+    }
+
+    const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+    if (twitterTitle) {
+      twitterTitle.setAttribute('content', pageMetadata.title);
+    }
+
+    const twitterDescription = document.querySelector('meta[property="twitter:description"]');
+    if (twitterDescription) {
+      twitterDescription.setAttribute('content', pageMetadata.description);
+    }
   }, [currentPage]);
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-primary-accent selection:text-white">
       <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      
+
       <main className="flex-grow">
         <AnimatePresence mode="wait">
           <motion.div
@@ -1309,6 +1463,7 @@ export default function App() {
             {currentPage === 'legal' && <LegalPage />}
             {currentPage === 'faq' && <FAQPage setCurrentPage={setCurrentPage} />}
             {currentPage === 'contact' && <ContactPage />}
+            {currentPage === 'news' && <NewsPage />}
           </motion.div>
         </AnimatePresence>
       </main>
