@@ -18,12 +18,36 @@ import {
   Lock,
   Plus,
   Linkedin,
-  Mail
+  Mail,
+  Phone
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
+import { useForm } from '@formspree/react';
 
 // --- Types ---
 type Page = 'home' | 'about' | 'how-it-works' | 'pricing' | 'faq' | 'contact' | 'security' | 'legal' | 'news';
+
+// --- Brand / Contact / Social config (from .env) ---
+const BRAND_NAME = import.meta.env.VITE_BRAND_NAME;
+const EMAIL = import.meta.env.VITE_EMAIL;
+const PHONE = import.meta.env.VITE_PHONE;
+const WHATSAPP = import.meta.env.VITE_WHATSAPP;
+const TWITTER_URL = import.meta.env.VITE_TWITTER_URL;
+const LINKEDIN_URL = import.meta.env.VITE_LINKEDIN_URL;
+const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL;
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+
+const BrandWordmark = ({ className = '' }: { className?: string }) => {
+  const parts = (BRAND_NAME || '').trim().split(/\s+/);
+  const first = parts[0] || '';
+  const rest = parts.slice(1).join(' ');
+  return (
+    <span className={className}>
+      {first.toUpperCase()}
+      {rest && <span className="font-light opacity-60"> {rest.toUpperCase()}</span>}
+    </span>
+  );
+};
 
 // --- Components ---
 
@@ -103,9 +127,9 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
             className="flex items-center gap-2 cursor-pointer group"
             onClick={() => setCurrentPage('home')}
           >
-            <span className={`text-xl font-bold tracking-tight transition-colors duration-500 ${isDarkNav ? 'text-white' : 'text-white'}`}>
-              LEASEHOLD <span className="font-light opacity-60">MANAGEMENT</span>
-            </span>
+            <BrandWordmark
+              className={`text-xl font-bold tracking-tight transition-colors duration-500 ${isDarkNav ? 'text-white' : 'text-white'}`}
+            />
           </div>
 
           <div className="hidden md:flex items-center gap-1 lg:gap-2">
@@ -186,9 +210,7 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
           <div className="flex items-center gap-2 mb-6">
-            <span className="text-lg font-bold tracking-tight">
-              LEASEHOLD <span className="font-light opacity-60">MANAGEMENT</span>
-            </span>
+            <BrandWordmark className="text-lg font-bold tracking-tight" />
           </div>
           <p className="text-muted-gray max-w-sm leading-relaxed text-lg">
             نحن نعيد تعريف إدارة العقارات طويلة الأمد عبر التكنولوجيا والوضوح التشغيلي التام.
@@ -216,16 +238,41 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
 
       <div className="pt-10 border-t border-border-subtle flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="text-sm text-muted-gray font-medium">
-          © 2026 Leasehold Management. جميع الحقوق محفوظة.
+          © 2026 {BRAND_NAME}. جميع الحقوق محفوظة.
         </div>
         <div className="flex gap-6">
-          <a href="#" className="text-muted-gray hover:text-primary-dark transition-colors">
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-          </a>
-          <a href="#" className="text-muted-gray hover:text-primary-dark transition-colors"><Linkedin className="w-5 h-5" /></a>
-          <a href="mailto:info@leaseholdmgmt.com" className="text-muted-gray hover:text-primary-dark transition-colors"><Mail className="w-5 h-5" /></a>
+          {TWITTER_URL && (
+            <a href={TWITTER_URL} target="_blank" rel="noopener noreferrer" aria-label="X" className="text-muted-gray hover:text-primary-dark transition-colors">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+          )}
+          {LINKEDIN_URL && (
+            <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="text-muted-gray hover:text-primary-dark transition-colors"><Linkedin className="w-5 h-5" /></a>
+          )}
+          {INSTAGRAM_URL && (
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-muted-gray hover:text-primary-dark transition-colors">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          )}
+          {EMAIL && (
+            <a href={`mailto:${EMAIL}`} aria-label="Email" className="text-muted-gray hover:text-primary-dark transition-colors"><Mail className="w-5 h-5" /></a>
+          )}
+          {PHONE && (
+            <a href={`tel:${PHONE}`} aria-label="Phone" className="text-muted-gray hover:text-primary-dark transition-colors"><Phone className="w-5 h-5" /></a>
+          )}
+          {WHATSAPP && (
+            <a href={`https://wa.me/${WHATSAPP.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-muted-gray hover:text-primary-dark transition-colors">
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z" />
+              </svg>
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -721,7 +768,7 @@ const AboutPage = () => (
 
         <div className="space-y-10 text-xl text-muted-gray leading-relaxed font-light">
           <p className="text-primary-dark font-medium text-2xl">
-            نحن في Leasehold Management لا نقدم خدمات متفرقة، بل نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد.
+            نحن في {BRAND_NAME} لا نقدم خدمات متفرقة، بل نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد.
           </p>
           <p>
             نركز على وضوح الأداء، استقرار التشغيل، واستدامة القيمة — لضمان أن يعمل عقارك بكفاءة اليوم… ويستمر بنفس الجودة لسنوات.
@@ -925,7 +972,7 @@ const LegalPage = () => {
               سياسة الخصوصية
             </h2>
             <div className="prose prose-lg text-muted-gray max-w-none space-y-6 font-light">
-              <p>نحن في Leasehold Management نولي أهمية قصوى لخصوصية بياناتك. نجمع فقط المعلومات الضرورية لإدارة عقارك وتقديم خدماتنا بكفاءة.</p>
+              <p>نحن في {BRAND_NAME} نولي أهمية قصوى لخصوصية بياناتك. نجمع فقط المعلومات الضرورية لإدارة عقارك وتقديم خدماتنا بكفاءة.</p>
               <ul className="list-disc list-inside space-y-3">
                 <li>يتم تخزين كافة البيانات المالية والشخصية في خوادم مشفرة وآمنة.</li>
                 <li>لا نقوم بمشاركة بياناتك مع أي طرف ثالث لأغراض تسويقية.</li>
@@ -1115,41 +1162,40 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
 
 const ContactPage = () => {
   const [step, setStep] = useState(1);
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formError, setFormError] = useState('');
+  const [step1Values, setStep1Values] = useState({ name: '', phone: '', email: '' });
+  const [state, formspreeSubmit, resetForm] = useForm(FORMSPREE_ID);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const isSubmitting = state.submitting;
+  const submitted = state.succeeded;
+  const formError = state.errors
+    ? state.errors.getFormErrors().map((err) => err.message).join(', ') || 'حدث خطأ في إرسال النموذج'
+    : '';
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormError('');
-
+    const fd = new FormData(e.currentTarget);
     if (step === 1) {
+      setStep1Values({
+        name: String(fd.get('name') ?? ''),
+        phone: String(fd.get('phone') ?? ''),
+        email: String(fd.get('email') ?? ''),
+      });
       setStep(2);
-    } else {
-      setIsSubmitting(true);
-
-      try {
-        const formData = new FormData(e.currentTarget);
-        const response = await fetch('https://formspree.io/f/xojpqzoj', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          setSubmitted(true);
-        } else {
-          const data = await response.json();
-          setFormError(data.errors?.map((err: any) => err.message).join(', ') || 'حدث خطأ في إرسال النموذج');
-        }
-      } catch (error) {
-        setFormError('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
-      } finally {
-        setIsSubmitting(false);
-      }
+      return;
     }
+    formspreeSubmit({
+      ...step1Values,
+      city: String(fd.get('city') ?? ''),
+      units: String(fd.get('units') ?? ''),
+      status: String(fd.get('status') ?? ''),
+      message: String(fd.get('message') ?? ''),
+    });
+  };
+
+  const handleReset = () => {
+    resetForm();
+    setStep1Values({ name: '', phone: '', email: '' });
+    setStep(1);
   };
 
   return (
@@ -1172,15 +1218,28 @@ const ContactPage = () => {
                 <p className="text-[#6B7280] text-lg">السعودية، مدينة الرياض، طريق الملك فهد</p>
               </div>
             </div>
-            <div className="flex items-center gap-6 group">
-              <div className="w-16 h-16 bg-[#FAFAFA] border border-[#0B0B0B]/5 text-[#0B0B0B] rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:bg-[#0B0B0B] group-hover:text-white">
-                <MessageSquare className="w-7 h-7" />
+            {EMAIL && (
+              <div className="flex items-center gap-6 group">
+                <div className="w-16 h-16 bg-[#FAFAFA] border border-[#0B0B0B]/5 text-[#0B0B0B] rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:bg-[#0B0B0B] group-hover:text-white">
+                  <MessageSquare className="w-7 h-7" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-[#0B0B0B] mb-1 tracking-tight">تواصل مباشر</h4>
+                  <a href={`mailto:${EMAIL}`} className="text-[#6B7280] text-lg hover:text-[#0B0B0B] transition-colors">{EMAIL}</a>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl font-bold text-[#0B0B0B] mb-1 tracking-tight">تواصل مباشر</h4>
-                <p className="text-[#6B7280] text-lg">info@leaseholdmgmt.com</p>
+            )}
+            {PHONE && (
+              <div className="flex items-center gap-6 group">
+                <div className="w-16 h-16 bg-[#FAFAFA] border border-[#0B0B0B]/5 text-[#0B0B0B] rounded-3xl flex items-center justify-center shrink-0 transition-all duration-500 group-hover:bg-[#0B0B0B] group-hover:text-white">
+                  <Phone className="w-7 h-7" />
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-[#0B0B0B] mb-1 tracking-tight">اتصل بنا</h4>
+                  <a href={`tel:${PHONE}`} dir="ltr" className="text-[#6B7280] text-lg hover:text-[#0B0B0B] transition-colors">{PHONE}</a>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
@@ -1202,7 +1261,7 @@ const ContactPage = () => {
                 </div>
                 <h3 className="text-4xl font-bold text-[#0B0B0B] mb-6 tracking-tight">تم استلام طلبك بنجاح</h3>
                 <p className="text-[#6B7280] text-xl mb-12 font-light">سيتواصل معك فريقنا خلال 48 ساعة لترتيب موعد التقييم الأولي.</p>
-                <Button variant="outline" onClick={() => { setSubmitted(false); setStep(1); }} className="px-12 py-4 rounded-full">
+                <Button variant="outline" onClick={handleReset} className="px-12 py-4 rounded-full">
                   إرسال طلب آخر
                 </Button>
               </motion.div>
@@ -1228,15 +1287,15 @@ const ContactPage = () => {
                       <h3 className="text-2xl font-bold text-[#0B0B0B] tracking-tight">خلنا نبدأ بمعلومات بسيطة</h3>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">الاسم الكامل</label>
-                        <input required name="name" type="text" placeholder="مثلاً: فيصل بن عبدالعزيز" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
+                        <input required name="name" type="text" defaultValue={step1Values.name} placeholder="مثلاً: فيصل بن عبدالعزيز" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all placeholder:text-[#0B0B0B]/20" />
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">رقم الجوال</label>
-                        <input required name="phone" type="tel" placeholder="05XXXXXXXX (للتواصل السريع)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
+                        <input required name="phone" type="tel" defaultValue={step1Values.phone} placeholder="05XXXXXXXX (للتواصل السريع)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
                       </div>
                       <div className="space-y-3">
                         <label className="text-sm font-bold text-[#0B0B0B]">البريد الإلكتروني</label>
-                        <input required name="email" type="email" placeholder="name@company.com (لإرسال التقرير)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
+                        <input required name="email" type="email" defaultValue={step1Values.email} placeholder="name@company.com (لإرسال التقرير)" className="w-full mt-2 p-5 bg-[#FAFAFA] border border-[#0B0B0B]/5 rounded-2xl focus:ring-2 focus:ring-[#0B0B0B]/5 focus:border-[#0B0B0B] outline-none transition-all text-left placeholder:text-[#0B0B0B]/20" />
                       </div>
                     </motion.div>
                   ) : (
@@ -1314,7 +1373,7 @@ const NewsPage = () => {
   const newsArticles = [
     {
       date: "15 مارس 2026",
-      title: "توسع Leasehold Management في السوق السعودي",
+      title: `توسع ${BRAND_NAME} في السوق السعودي`,
       excerpt: "نعلن عن افتتاح مكاتب جديدة في جدة والدمام لتقديم خدمات إدارة عقارات أفضل",
       category: "أخبار الشركة"
     },
@@ -1376,39 +1435,39 @@ export default function App() {
     // Update page metadata dynamically
     const metadata: Record<Page, { title: string; description: string }> = {
       home: {
-        title: 'Leasehold Management | إدارة أصول الملكية المؤجرة',
+        title: `${BRAND_NAME} | إدارة أصول الملكية المؤجرة`,
         description: 'منظومة تشغيل موحدة تدير جميع عمليات العقار - التشغيل، الصيانة، والإدارة المالية'
       },
       about: {
-        title: 'من نحن | Leasehold Management',
+        title: `من نحن | ${BRAND_NAME}`,
         description: 'نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد بوضوح واستمرارية'
       },
       'how-it-works': {
-        title: 'طريقة العمل | Leasehold Management',
+        title: `طريقة العمل | ${BRAND_NAME}`,
         description: 'منهجية منظمة لإدارة عقارك بكفاءة وشفافية تامة'
       },
       pricing: {
-        title: 'الأسعار | Leasehold Management',
+        title: `الأسعار | ${BRAND_NAME}`,
         description: 'نموذج تسعير شفاف - ادفع فقط عند الطلب بدون التزام طويل الأمد'
       },
       faq: {
-        title: 'الأسئلة الشائعة | Leasehold Management',
+        title: `الأسئلة الشائعة | ${BRAND_NAME}`,
         description: 'إجابات على جميع أسئلتك حول نموذج إدارتنا الحديث والشفاف'
       },
       contact: {
-        title: 'تواصل معنا | Leasehold Management',
+        title: `تواصل معنا | ${BRAND_NAME}`,
         description: 'ابدأ تنظيم إدارة عقارك مع فريقنا المختص'
       },
       security: {
-        title: 'الأمان | Leasehold Management',
+        title: `الأمان | ${BRAND_NAME}`,
         description: 'معايير أمان صارمة لحماية بياناتك وأموالك وأصولك العقارية'
       },
       legal: {
-        title: 'الخصوصية والشروط | Leasehold Management',
+        title: `الخصوصية والشروط | ${BRAND_NAME}`,
         description: 'سياسة الخصوصية وشروط الخدمة - شفافية ووضوح في التعامل'
       },
       news: {
-        title: 'الأخبار | Leasehold Management',
+        title: `الأخبار | ${BRAND_NAME}`,
         description: 'آخر الأخبار والتطورات في عالم إدارة العقارات'
       }
     };
