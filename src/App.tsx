@@ -312,11 +312,11 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
           >
 
             <h1 className="text-4xl md:text-6xl font-bold text-white leading-[1.2] mb-6 tracking-tight text-balance">
-              ندير عقارك بالكامل… <br />
+              ندير عقارك بالكامل <br />
               <span className="text-soft-accent">طوال مدة الانتفاع</span>
             </h1>
             <p className="text-base md:text-lg text-white/50 mb-10 leading-relaxed max-w-2xl mx-auto font-light text-balance">
-              منظومة تشغيل موحدة تدير جميع عمليات العقار — التشغيل، الصيانة، والإدارة المالية — ضمن منصة واحدة تضمن استقراره وقيمته عبر الزمن.
+              منظومة تشغيل موحدة تدير جميع عمليات العقار ضمن منصة واحدة تضمن استقراره وقيمته عبر الزمن.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
               <Button
@@ -339,7 +339,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
             {/* Trust Indicators */}
             <div className="flex items-center justify-center gap-8 text-white/30">
               <div className="flex flex-col items-center">
-                <span className="text-xl font-semibold text-white/40">+1200</span>
+                <span className="text-xl font-semibold text-white/40">+120</span>
                 <span className="text-[10px] uppercase tracking-widest">وحدة تحت الإدارة</span>
               </div>
               <div className="w-px h-8 bg-white/10"></div>
@@ -363,62 +363,48 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
       </section>
 
       {/* Why Integrated Management Section */}
-      <section className="py-32 bg-white border-y border-border-subtle">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="max-w-xl">
-              <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">
-                المشكلة ليست في العقار… <br />
-                <span className="text-soft-accent">بل في طريقة إدارته</span>
-              </h2>
-              <div className="space-y-6">
-                <p className="text-lg text-muted-gray leading-relaxed font-light">
-                  في عقارات الانتفاع طويلة الأمد، لا تكون المشكلة في العقار نفسه، بل في تعدد الجهات التي تديره.
-                </p>
-                <p className="text-lg text-muted-gray leading-relaxed font-light">
-                  صيانة، محاسبة، تأجير، متابعة تشغيلية — كل جهة تعمل بشكل منفصل، بدون منظومة تربطها.
-                </p>
-                <p className="text-lg text-primary-dark font-medium leading-relaxed">
-                  النتيجة؟ تداخل في المسؤوليات، ضعف في وضوح الأداء، وتراجع تدريجي في حالة الأصل مع مرور الوقت.
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {[
-                { title: 'إدارة واحدة', desc: 'بدلاً من عدة جهات متفرقة' },
-                { title: 'وضوح كامل', desc: 'كل شيء مرتبط في نظام واحد' },
-                { title: 'استقرار طويل الأمد', desc: 'تشغيل مستمر بدون تذبذب' },
-                { title: 'حماية الأصل', desc: 'صيانة وإدارة تحافظ على القيمة' },
-              ].map((item, i) => (
-                <div key={i} className="group p-8 bg-light-bg rounded-3xl border border-border-subtle hover:border-soft-accent/30 transition-all duration-500 hover:shadow-premium">
-                  <div className="text-xl font-bold text-primary-dark mb-2 tracking-tight group-hover:text-soft-accent transition-colors">{item.title}</div>
-                  <div className="text-sm text-muted-gray leading-relaxed font-light">{item.desc}</div>
-                </div>
-              ))}
+      <section className="pt-32 bg-white border-border-subtle flex justify-center">
+        <div className="max-w-7xl  px-6">
+          <div className="max-w-xl">
+            <h2 className="text-3xl text-center md:text-5xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">
+              المشكلة ليست في العقار <br />
+              <span className="text-soft-accent">بل في طريقة إدارته</span>
+            </h2>
+            <div className="space-y-6">
+              <p className="text-lg text-muted-gray leading-relaxed font-light">
+                في عقارات الانتفاع طويلة الأمد، لا تكون المشكلة في العقار نفسه، بل في تعدد الجهات التي تديره.
+              </p>
+              <p className="text-lg text-muted-gray leading-relaxed font-light">
+                صيانة، محاسبة، تأجير، متابعة تشغيلية كل جهة تعمل بشكل منفصل، بدون منظومة تربطها.
+              </p>
+              <p className="text-lg text-primary-dark font-medium leading-relaxed">
+                النتيجة؟<br /> تداخل في المسؤوليات، ضعف في وضوح الأداء، وتراجع تدريجي في حالة الأصل مع مرور الوقت.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-32 bg-white">
+      <section id="services" className="pt-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-4xl mx-auto mb-24">
+          <div className="text-center max-w-4xl mx-auto mb-10">
             <h2 className="text-4xl md:text-6xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">
-              كل ما يحتاجه عقارك — <br />
+              كل ما يحتاجه عقارك <br />
               <span className="text-soft-accent">تحت إدارة واحدة</span>
             </h2>
             <div className="space-y-4">
               <p className="text-lg md:text-xl text-muted-gray leading-relaxed font-light">
-                إدارة عقارات الانتفاع طويلة الأمد ليست مهام متفرقة… <br className="hidden md:block" />
+                إدارة عقارات الانتفاع طويلة الأمد ليست مهام متفرقة <br className="hidden md:block" />
                 بل منظومة تشغيل متكاملة تتطلب متابعة مستمرة وانضباطًا عاليًا لسنوات.
               </p>
               <p className="text-lg md:text-xl text-primary-dark font-medium leading-relaxed">
-                نحن نوفر إدارة شاملة تغطي كل ما يحتاجه عقارك — <br className="hidden md:block" />
-                من التشغيل اليومي، إلى الأداء المالي، إلى الحفاظ على قيمة الأصل واستقراره.
+                نحن نوفر إدارة شاملة تغطي كل ما يحتاجه عقارك
               </p>
             </div>
           </div>
+
+
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {[
@@ -439,8 +425,36 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
             ))}
           </div>
 
-          <div className="flex flex-col items-center gap-8 pt-12 border-t border-border-subtle">
-            <p className="text-lg font-medium text-primary-dark">كل ما يحتاجه عقارك — ضمن منظومة تشغيل واحدة</p>
+          <div className="flex flex-col items-center gap-8 pt-5 border-border-subtle">
+            <div className="text-center max-w-4xl mx-auto mb-5">
+              <h2 className="text-4xl md:text-6xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">
+
+                <span className="text-soft-accent">النتيجة ؟ </span>
+              </h2>
+              <div className="space-y-4">
+                <p className="text-lg md:text-xl text-primary-dark font-medium leading-relaxed">
+                  بدلاً من التعامل مع جهات متعددة، تحصل على إدارة موحدة توفر لك <br className="hidden md:block" />
+                  وضوح كامل في الأداء، استقرار مالي مستمر، وحماية طويلة الأمد لقيمة عقارك.
+                </p>
+              </div>
+            </div>
+            {/* Centered 2x2 Grid */}
+            <div className="flex justify-center gap-5 flex-wrap mb-5 max-w-7xl">
+
+              {[
+                { title: 'إدارة واحدة', desc: 'بدلاً من عدة جهات متفرقة' },
+                { title: 'وضوح كامل', desc: 'كل شيء مرتبط في نظام واحد' },
+                { title: 'استقرار طويل الأمد', desc: 'تشغيل مستمر بدون تذبذب' },
+                { title: 'حماية الأصل', desc: 'صيانة وإدارة تحافظ على القيمة' },
+              ].map((item, i) => (
+                <div key={i} className="group p-8 bg-light-bg rounded-3xl border border-border-subtle hover:border-soft-accent/30 transition-all duration-500 hover:shadow-premium">
+                  <div className="text-xl font-bold text-primary-dark mb-2 tracking-tight group-hover:text-soft-accent transition-colors">{item.title}</div>
+                  <div className="text-sm text-muted-gray leading-relaxed font-light">{item.desc}</div>
+                </div>
+              ))}
+
+            </div>
+
             <Button
               variant="secondary"
               onClick={() => setCurrentPage('contact')}
@@ -459,14 +473,14 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
               <h2 className="text-4xl md:text-6xl font-bold text-primary-dark mb-8 leading-tight tracking-tight">
-                لا اشتراك. لا التزام. <br />
+                لا اشتراك؟ لا التزام؟ <br />
                 <span className="text-soft-accent">لا تدفع إلا إذا طلبت</span>
               </h2>
               <p className="text-xl text-muted-gray mb-10 leading-relaxed font-light">
                 نؤمن أن إدارة العقار لا يجب أن تكون التزامًا ماليًا ثابتًا، ولا اشتراكًا شهريًا تدفعه سواء استخدمت الخدمة أو لا.
                 <br /><br />
                 لذلك، نموذجنا بسيط: <br />
-                كل خدمة تطلبها — تدفع مقابلها فقط.
+                كل خدمة تطلبها تدفع مقابلها فقط.
               </p>
               <div className="space-y-6 mb-10">
                 {[
@@ -486,7 +500,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 ))}
               </div>
               <Button variant="primary" onClick={() => setCurrentPage('contact')} icon={ArrowLeft}>
-                سجل عقارك — بدون التزام
+                سجل عقارك الآن
               </Button>
             </div>
 
@@ -510,7 +524,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
               </Card>
               <Card className="p-10 bg-primary-dark text-white border-none flex flex-col items-center justify-center text-center" hover={false}>
                 <div className="text-xs font-bold text-soft-accent uppercase tracking-widest mb-4">نموذج العمل</div>
-                <div className="text-2xl font-bold mb-2">"إدارة كاملة — بدون التزام"</div>
+                <div className="text-2xl font-bold mb-2">إدارة كاملة بدون التزام</div>
               </Card>
             </div>
           </div>
@@ -546,10 +560,6 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-2 px-3 py-1 bg-green-50 text-green-600 rounded-full text-[10px] font-bold uppercase tracking-widest border border-green-100">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    مباشر الآن
-                  </div>
                   <div className="w-8 h-8 rounded-full bg-primary-dark/5 flex items-center justify-center">
                     <Users className="w-4 h-4 text-primary-dark/40" />
                   </div>
@@ -665,16 +675,16 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
             >
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 leading-tight tracking-tight">
                 إدارة مصممة <br />
-                <span className="text-soft-accent">لعقود تمتد لعقود</span>
+                <span className="text-soft-accent">لحقوق تمتد لعقود</span>
               </h2>
               <p className="text-xl text-white/80 mb-12 leading-relaxed font-light">
                 العقارات المرتبطة بحقوق انتفاع طويلة الأمد لا تُدار بنفس طريقة العقارات التقليدية.
                 <br /><br />
-                هي تحتاج إلى منظومة تشغيل تركز على الاستقرار، وضوح الأداء، واستدامة القيمة — على مدى سنوات طويلة، وليس مجرد إدارة يومية.
+                تحتاج إلى منظومة تشغيل تركز على الاستقرار، وضوح الأداء، واستدامة القيمة على مدى سنوات طويلة، وليس مجرد إدارة يومية.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {[
-                  "تشغيل مستقر على المدى الطويل",
+                  "تشغيل مستقر على الأمد الطويل",
                   "وضوح كامل في الأداء والتدفقات",
                   "حماية مستمرة لقيمة العقار",
                   "إدارة منظمة للعلاقة بين جميع الأطراف"
@@ -707,7 +717,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                     99
                   </motion.div>
                   <div className="text-xl font-light text-white/80 mt-8 max-w-[280px] mx-auto leading-relaxed">
-                    99 سنة ليست مدة… <br />
+                    99 سنة ليست مدة <br />
                     بل مسؤولية تشغيل مستمرة
                   </div>
                 </div>
@@ -731,7 +741,7 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 عقارك بشكل مختلف؟
               </h2>
               <p className="text-xl md:text-2xl text-white/60 mb-16 max-w-2xl mx-auto font-light leading-relaxed">
-                خلنا ندير لك التفاصيل… ونرجع لك الوضوح.
+                خلنا ندير لك التفاصيل ونرجع لك الوضوح.
               </p>
               <div className="flex flex-col items-center gap-6">
                 <Button
@@ -742,9 +752,6 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
                 >
                   سجل عقارك
                 </Button>
-                <div className="text-sm font-bold text-white/40 uppercase tracking-widest">
-                  بدون التزام • تبدأ خلال دقائق
-                </div>
               </div>
             </div>
           </Card>
@@ -762,16 +769,15 @@ const AboutPage = () => (
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="inline-block px-4 py-1 rounded-full bg-primary-dark/5 text-primary-dark text-sm font-bold mb-6 uppercase tracking-widest">من نحن</div>
-        <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-4 tracking-tight">لا ندير عقارات… <br /> <span className="text-muted-gray">ندير استمراريتها.</span></h1>
-        <div className="text-lg font-bold text-primary-accent uppercase tracking-[0.2em] mb-12">تشغيل واضح. نتائج مستمرة. بدون تعقيد.</div>
+        <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-4 tracking-tight">لا ندير عقارات <br /> <span className="text-muted-gray">ندير استمراريتها.</span></h1>
+        <div className="text-lg font-bold text-primary-accent uppercase tracking-[0.2em] mb-12">تشغيل واضح, نتائج مستمرة, بدون تعقيد</div>
 
         <div className="space-y-10 text-xl text-muted-gray leading-relaxed font-light">
           <p className="text-primary-dark font-medium text-2xl">
             نحن في {BRAND_NAME} لا نقدم خدمات متفرقة، بل نبني منظومة تشغيل متكاملة لإدارة العقارات طويلة الأمد.
           </p>
           <p>
-            نركز على وضوح الأداء، استقرار التشغيل، واستدامة القيمة — لضمان أن يعمل عقارك بكفاءة اليوم… ويستمر بنفس الجودة لسنوات.
+            نركز على وضوح الأداء، استقرار التشغيل، واستدامة القيمة<br />لضمان أن يعمل عقارك بكفاءة اليوم ويستمر بنفس الجودة لسنوات.
           </p>
         </div>
 
@@ -822,14 +828,14 @@ const HowItWorksPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void 
   return (
     <div className="pt-48 pb-32 bg-[#FAFAFA]">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-32">
-          <h1 className="text-5xl md:text-8xl font-bold text-[#0B0B0B] mb-10 tracking-tight leading-[1.1]">كيف نعمل <br /> <span className="text-[#6B7280]">معك؟</span></h1>
-          <p className="text-xl md:text-2xl text-[#6B7280] max-w-3xl mx-auto leading-relaxed font-light">
+        <div className="text-center mb-20">
+          <h1 className="text-5xl md:text-8xl font-bold text-[#0B0B0B] mb-10 tracking-tight leading-[1.1]">كيف نعمل <span className='text-[#6B7280]'>معك؟</span></h1>
+          <p className="text-xl md:text-xl text-[#6B7280] max-w-3xl mx-auto leading-relaxed font-light mb-4">
             نتبع منهجية منظمة تضمن انتقالاً سلساً لإدارة عقارك، مع التركيز على الوضوح التام في كل خطوة.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-48">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-20">
           {steps.map((step, i) => (
             <motion.div
               key={i}
@@ -863,12 +869,12 @@ const HowItWorksPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void 
                 عقارك بشكل مختلف؟
               </h2>
               <p className="text-xl md:text-2xl text-white/60 mb-16 max-w-2xl mx-auto font-light leading-relaxed">
-                خلنا ندير لك التفاصيل… ونرجع لك الوضوح.
+                خلنا ندير لك التفاصيل ونرجع لك الوضوح.
               </p>
               <Button
                 variant="white"
                 onClick={() => setCurrentPage('contact')}
-                className="px-16 py-6 text-xl rounded-full hover:scale-105 transition-transform duration-300"
+                className="px-16 py-6 text-xl w-fit mx-auto rounded-full hover:scale-105 transition-transform duration-300"
                 icon={ArrowLeft}
               >
                 سجل عقارك
@@ -1102,7 +1108,7 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-24">
         <h1 className="text-5xl md:text-8xl font-bold text-[#0B0B0B] mb-8 tracking-tight leading-tight">
-          تعرف بالضبط… <br />
+          تعرف بالضبط <br />
           <span className="text-[#6B7280]">مقابل إيش تدفع</span>
         </h1>
         <p className="text-xl md:text-2xl text-[#6B7280] max-w-3xl mx-auto leading-relaxed font-light mb-12">
@@ -1112,12 +1118,9 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
         {/* Business Model Highlight */}
         <div className="inline-block max-w-2xl mx-auto p-8 rounded-[32px] bg-[#0B0B0B] text-white shadow-2xl">
           <div className="flex flex-col md:flex-row items-center gap-6 text-right md:text-center">
-            <div className="w-12 h-12 rounded-full bg-primary-accent flex items-center justify-center shrink-0">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
             <div>
               <div className="text-xl font-bold mb-1">بدون التزام طويل الأمد</div>
-              <div className="text-white/70 font-light">تدفع فقط عند طلب الخدمة — وإذا ما طلبت، ما تدفع شيء.</div>
+              <div className="text-white/70 font-light">تدفع فقط عند طلب الخدمة وإذا ما طلبت، ما تدفع شيء.</div>
             </div>
           </div>
         </div>
@@ -1143,7 +1146,7 @@ const PricingPage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) 
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-4xl md:text-6xl font-bold text-[#0B0B0B] mb-8 tracking-tight">خلنا نحسبها لك بدقة</h2>
         <p className="text-xl text-[#6B7280] mb-16 max-w-2xl mx-auto font-light leading-relaxed">
-          خلال دقائق، نعطيك تصور واضح لتكلفة إدارة عقارك… بدون أي التزام.
+          خلال دقائق، نعطيك تصور واضح لتكلفة إدارة عقارك بدون أي التزام.
         </p>
         <div className="flex justify-center">
           <Button
@@ -1202,7 +1205,6 @@ const ContactPage = () => {
     <div className="pt-48 pb-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
         <div>
-          <div className="inline-block px-4 py-1 rounded-full bg-[#0B0B0B]/5 text-[#0B0B0B] text-sm font-bold mb-8 uppercase tracking-widest">تواصل معنا</div>
           <h1 className="text-5xl md:text-8xl font-bold text-[#0B0B0B] mb-8 tracking-tight leading-tight">ابدأ تنظيم <br /> <span className="text-[#6B7280]">إدارة عقارك</span></h1>
           <p className="text-xl md:text-2xl text-[#6B7280] mb-12 leading-relaxed font-light max-w-lg">
             فريقنا جاهز لمناقشة احتياجات عقارك وتصميم نموذج إدارة مناسب يضمن لك الاستقرار والوضوح التام.
@@ -1244,11 +1246,6 @@ const ContactPage = () => {
         </div>
 
         <div className="relative">
-          {/* Trust Message Badge */}
-          <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-20 bg-[#0B0B0B] text-white px-8 py-3 rounded-full text-sm font-bold shadow-[0_10px_30px_rgba(0,0,0,0.2)] border border-white/10 whitespace-nowrap">
-            بدون التزام • 0 ريال حتى تبدأ
-          </div>
-
           <Card className="p-10 md:p-16 bg-white border border-[#0B0B0B]/5 rounded-[48px] shadow-2xl relative z-10" hover={false}>
             {submitted ? (
               <motion.div
@@ -1347,7 +1344,7 @@ const ContactPage = () => {
                     {isSubmitting ? "جاري الإرسال..." : step === 1 ? "التالي" : "احصل على تقييم مجاني"}
                   </Button>
                   <p className="text-center text-xs text-[#6B7280] font-bold">
-                    بدون أي التزام — نبدأ فقط إذا قررت
+                    بدون أي التزام نبدأ فقط إذا قررت
                   </p>
                   {step === 2 && (
                     <button
