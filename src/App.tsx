@@ -124,11 +124,13 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
       <div className={`max-w-7xl mx-auto px-6`}>
         <div className={`flex justify-between items-center transition-all duration-500 px-6 py-3 rounded-2xl ${isDarkNav ? 'glass-dark shadow-glass' : 'bg-transparent'}`}>
           <div
-            className="flex items-center gap-2 cursor-pointer group"
             onClick={() => setCurrentPage('home')}
+            className='w-full h-15 flex items-center'
           >
-            <BrandWordmark
-              className={`text-xl font-bold tracking-tight transition-colors duration-500 ${isDarkNav ? 'text-white' : 'text-white'}`}
+            <img
+              src="/logo_large.png"
+              alt={BRAND_NAME}
+              className="w-56 object-contain transition-all duration-500"
             />
           </div>
 
@@ -137,7 +139,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
               <button
                 key={link.value}
                 onClick={() => setCurrentPage(link.value)}
-                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${currentPage === link.value
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300  text-nowrap ${currentPage === link.value
                   ? isDarkNav ? 'bg-white/10 text-white' : 'bg-white/20 text-white'
                   : isDarkNav ? 'text-white/60 hover:text-white hover:bg-white/5' : 'text-white/80 hover:text-white hover:bg-white/10'
                   }`}
@@ -149,7 +151,7 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
             <Button
               variant={isDarkNav ? 'secondary' : 'white'}
               onClick={() => setCurrentPage('contact')}
-              className="py-2 px-6 text-sm"
+              className="py-2 px-6 text-sm text-nowrap"
             >
               سجل عقارك
             </Button>
@@ -209,8 +211,15 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
     <div className="max-w-7xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
         <div className="col-span-1 md:col-span-2">
-          <div className="flex items-center gap-2 mb-6">
-            <BrandWordmark className="text-lg font-bold tracking-tight" />
+          <div
+            onClick={() => setCurrentPage('home')}
+            className='w-full h-15 flex items-center'
+          >
+            <img
+              src="/logo_large.png"
+              alt={BRAND_NAME}
+              className="w-56 object-contain transition-all duration-500 brightness-0"
+            />
           </div>
           <p className="text-muted-gray max-w-sm leading-relaxed text-lg">
             نحن نعيد تعريف إدارة العقارات طويلة الأمد عبر التكنولوجيا والوضوح التشغيلي التام.

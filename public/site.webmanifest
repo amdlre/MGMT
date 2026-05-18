@@ -4,7 +4,7 @@
   "description": "منظومة تشغيل موحدة تدير جميع عمليات العقار",
   "icons": [
     {
-      "src": "/favicon.svg",
+      "src": "/logo_short.png",
       "sizes": "any",
       "type": "image/svg+xml"
     }
