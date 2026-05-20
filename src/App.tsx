@@ -374,19 +374,19 @@ const HomePage = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => 
       {/* Why Integrated Management Section */}
       <section className="pt-32 bg-white border-border-subtle flex justify-center">
         <div className="max-w-7xl  px-6">
-          <div className="max-w-xl">
+          <div className="max-w-2xl">
             <h2 className="text-3xl text-center md:text-5xl font-bold text-primary-dark mb-8 tracking-tight leading-tight">
               المشكلة ليست في العقار <br />
               <span className="text-soft-accent">بل في طريقة إدارته</span>
             </h2>
             <div className="space-y-6">
-              <p className="text-lg text-muted-gray leading-relaxed font-light">
+              <p className="text-lg text-muted-gray text-center font-light">
                 في عقارات الانتفاع طويلة الأمد، لا تكون المشكلة في العقار نفسه، بل في تعدد الجهات التي تديره.
               </p>
-              <p className="text-lg text-muted-gray leading-relaxed font-light">
+              <p className="text-lg text-muted-gray text-center font-light">
                 صيانة، محاسبة، تأجير، متابعة تشغيلية كل جهة تعمل بشكل منفصل، بدون منظومة تربطها.
               </p>
-              <p className="text-lg text-primary-dark font-medium leading-relaxed">
+              <p className="text-lg text-primary-dark font-medium text-center">
                 النتيجة؟<br /> تداخل في المسؤوليات، ضعف في وضوح الأداء، وتراجع تدريجي في حالة الأصل مع مرور الوقت.
               </p>
             </div>
