@@ -36,6 +36,7 @@ const TWITTER_URL = import.meta.env.VITE_TWITTER_URL;
 const LINKEDIN_URL = import.meta.env.VITE_LINKEDIN_URL;
 const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL;
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+const FORMSPREE_ID_NEWSLETTER = import.meta.env.VITE_FORMSPREE_ID_NEWSLETTER;
 
 const BrandWordmark = ({ className = '' }: { className?: string }) => {
   const parts = (BRAND_NAME || '').trim().split(/\s+/);
@@ -209,11 +210,11 @@ const Navbar = ({ currentPage, setCurrentPage }: { currentPage: Page, setCurrent
 const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
   <footer className="bg-white border-t border-border-subtle py-20">
     <div className="max-w-7xl mx-auto px-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-        <div className="col-span-1 md:col-span-2">
+      <div className="flex justify-between items-center gap-12 mb-20">
+        <div className="col-span-1 text-center">
           <div
             onClick={() => setCurrentPage('home')}
-            className='w-full h-15 flex items-center'
+            className='w-full h-15 flex items-center justify-center b'
           >
             <img
               src="/logo_large.png"
@@ -227,8 +228,8 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
         </div>
 
         <div>
-          <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-primary-dark">المنتج</h4>
-          <ul className="space-y-4 text-muted-gray">
+          <h4 className="text-sm font-bold uppercase tracking-widest text-center mb-6 text-primary-dark">المنتج</h4>
+          <ul className="space-y-4 text-muted-gray text-center">
             <li><button onClick={() => setCurrentPage('how-it-works')} className="hover:text-primary-dark transition-colors cursor-pointer">طريقة العمل</button></li>
             <li><button onClick={() => setCurrentPage('pricing')} className="hover:text-primary-dark transition-colors cursor-pointer">الأسعار</button></li>
             <li><button onClick={() => setCurrentPage('security')} className="hover:text-primary-dark transition-colors cursor-pointer">الأمان</button></li>
@@ -236,8 +237,8 @@ const Footer = ({ setCurrentPage }: { setCurrentPage: (p: Page) => void }) => (
         </div>
 
         <div>
-          <h4 className="text-sm font-bold uppercase tracking-widest mb-6 text-primary-dark">الشركة</h4>
-          <ul className="space-y-4 text-muted-gray">
+          <h4 className="text-sm font-bold uppercase tracking-widest text-center mb-6 text-primary-dark">الشركة</h4>
+          <ul className="space-y-4 text-muted-gray text-center">
             <li><button onClick={() => setCurrentPage('about')} className="hover:text-primary-dark transition-colors cursor-pointer">من نحن</button></li>
             <li><button onClick={() => setCurrentPage('news')} className="hover:text-primary-dark transition-colors cursor-pointer">الأخبار</button></li>
             <li><button onClick={() => setCurrentPage('legal')} className="hover:text-primary-dark transition-colors cursor-pointer">الخصوصية والشروط</button></li>
@@ -924,10 +925,6 @@ const SecurityPage = () => {
     <div className="pt-48 pb-32 bg-light-bg">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-24">
-          <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-primary-dark/5 text-primary-dark text-sm font-bold mb-6 uppercase tracking-widest">
-            <ShieldCheck className="w-4 h-4 text-soft-accent" />
-            حماية أصولك
-          </div>
           <h1 className="text-5xl md:text-7xl font-bold text-primary-dark mb-8 tracking-tight">الأمان في <br /> <span className="text-muted-gray">قلب عملياتنا</span></h1>
           <p className="text-xl text-muted-gray max-w-2xl mx-auto leading-relaxed font-light">
             نحن ندرك أن عقارك هو استثمارك الأهم، لذلك نضع معايير أمان صارمة لحماية بياناتك وأموالك وأصولك العقارية.
@@ -1376,26 +1373,17 @@ const ContactPage = () => {
 };
 
 const NewsPage = () => {
-  const newsArticles = [
-    {
-      date: "15 مارس 2026",
-      title: `توسع ${BRAND_NAME} في السوق السعودي`,
-      excerpt: "نعلن عن افتتاح مكاتب جديدة في جدة والدمام لتقديم خدمات إدارة عقارات أفضل",
-      category: "أخبار الشركة"
-    },
-    {
-      date: "10 مارس 2026",
-      title: "تقرير: نمو قطاع الإدارة العقارية بنسبة 23%",
-      excerpt: "دراسة جديدة تظهر نمواً ملحوظاً في الطلب على خدمات الإدارة العقارية المتكاملة",
-      category: "تقارير السوق"
-    },
-    {
-      date: "5 مارس 2026",
-      title: "إطلاق لوحة التحكم الذكية للعملاء",
-      excerpt: "منصة جديدة توفر رؤية شاملة ومباشرة لأداء العقارات في الوقت الفعلي",
-      category: "تحديثات المنتج"
-    }
-  ];
+  const [newsletterState, newsletterSubmit, resetNewsletter] = useForm(FORMSPREE_ID_NEWSLETTER);
+
+  const newsletterError = newsletterState.errors
+    ? newsletterState.errors.getFormErrors().map((err) => err.message).join(', ') || 'حدث خطأ في الاشتراك'
+    : '';
+
+  const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    newsletterSubmit({ email: String(fd.get('email') ?? '') });
+  };
 
   return (
     <div className="pt-48 pb-32 bg-light-bg">
@@ -1408,23 +1396,54 @@ const NewsPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsArticles.map((article, i) => (
-            <Card key={i} className="p-8 bg-white border border-border-subtle group cursor-pointer" hover={true}>
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-xs font-bold text-primary-accent uppercase tracking-widest">{article.category}</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-border-subtle"></span>
-                <span className="text-xs text-muted-gray">{article.date}</span>
+        <Card className="max-w-3xl mx-auto p-12 md:p-16 bg-white border border-border-subtle text-center">
+          <div className="w-16 h-16 mx-auto mb-8 bg-primary-dark/5 text-primary-dark rounded-3xl flex items-center justify-center">
+            <Mail className="w-7 h-7" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-4 tracking-tight">اشترك في النشرة البريدية</h2>
+          <p className="text-muted-gray leading-relaxed font-light mb-10 max-w-xl mx-auto">
+            احصل على آخر الأخبار والمستجدات والتقارير حول قطاع إدارة العقارات مباشرة في بريدك الإلكتروني
+          </p>
+
+          {newsletterState.succeeded ? (
+            <div className="flex flex-col items-center gap-4">
+              <div className="w-14 h-14 bg-primary-dark text-white rounded-2xl flex items-center justify-center">
+                <CheckCircle2 className="w-7 h-7" />
               </div>
-              <h3 className="text-2xl font-bold text-primary-dark mb-4 tracking-tight group-hover:text-soft-accent transition-colors">{article.title}</h3>
-              <p className="text-muted-gray leading-relaxed font-light mb-6">{article.excerpt}</p>
-              <div className="flex items-center gap-2 text-primary-dark group-hover:text-soft-accent transition-colors">
-                <span className="text-sm font-bold">اقرأ المزيد</span>
-                <ArrowLeft className="w-4 h-4 group-hover:translate-x-[-4px] transition-transform" />
-              </div>
-            </Card>
-          ))}
-        </div>
+              <p className="text-lg font-bold text-primary-dark">تم اشتراكك بنجاح</p>
+              <p className="text-muted-gray font-light">شكراً لاهتمامك، سنتواصل معك قريباً</p>
+              <button
+                type="button"
+                onClick={() => resetNewsletter()}
+                className="text-sm font-bold text-primary-dark hover:text-soft-accent transition-colors mt-2"
+              >
+                اشترك بريد آخر
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+              <input
+                type="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+                disabled={newsletterState.submitting}
+                className="flex-1 px-6 py-4 rounded-2xl border border-border-subtle bg-light-bg text-primary-dark placeholder:text-muted-gray focus:outline-none focus:border-primary-dark transition-colors disabled:opacity-50"
+              />
+              <button
+                type="submit"
+                disabled={newsletterState.submitting}
+                className="px-8 py-4 rounded-2xl bg-primary-dark text-white font-bold hover:bg-soft-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+              >
+                {newsletterState.submitting ? 'جاري الإرسال...' : 'اشتراك'}
+              </button>
+            </form>
+          )}
+
+          {newsletterError && !newsletterState.succeeded && (
+            <p className="text-sm text-red-500 mt-4">{newsletterError}</p>
+          )}
+        </Card>
       </div>
     </div>
   );
